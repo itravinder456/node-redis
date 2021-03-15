@@ -11,7 +11,7 @@ var client = require('redis').createClient(
         no_ready_check: true,
         // host: config.redisEndPoint,
         // port: config.redisPort,
-        password: config.redis_auth_token
+        // password: config.redis_auth_token
     });
 
 
