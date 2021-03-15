@@ -1,23 +1,27 @@
 // Import the installed modules.
 const express = require('express');
 const responseTime = require('response-time');
-const axios = require('axios');
 const redisClient = require("./redis");
 var session = require('express-session');
 var redisStore = require('connect-redis')(session);
-const config = require("./config")
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
+
+app.use(cookieParser());
+
 app.use(session({
-    secret: 'mysecret$HFRYJJj218$$',
-    name: "session",
-    // create new redis store.
-    store: new redisStore({
-        client: redisClient, ttl: 60 * 1 // in seconds (60 * 1 = 1 Minute)
-    }),
+    secret: 'HAsheDsEcrEtKey$$646#'
+    , key: 'session'
+    // , proxy: 'true'
+    , store: new redisStore({
+        client: redisClient, ttl: 1 * 60 // in seconds (60 * 1 = 1 Minute)
+    })
+    ,
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    // cookie: { secure: true }
 }));
 
 
@@ -35,10 +39,11 @@ app.get('/', function (req, res) {
 
 
 app.get("/login", (req, res) => {
-    req.session.user = { username: "ravinder", "password": "asdafwvd" };
+    req.session.user = { username: "ravinder", "email": "asdafwvd@gmail.com" };
     // add username and password validation logic here if you want.If user is authenticated send the response as success
     res.end("success")
 });
+
 app.get("/logout", (req, res) => {
     req.session.destroy(err => {
         if (err) {

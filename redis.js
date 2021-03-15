@@ -1,6 +1,5 @@
 const config = require("./config")
-// create and connect redis client to local instance.
-// const client = redis.createClient();
+// create and connect redis client to server instance.
 console.log(config.redisEndPoint);
 var client = require('redis').createClient(config.redisPort, config.redisEndPoint, {
     no_ready_check: true
