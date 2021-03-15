@@ -14,6 +14,9 @@ var client = require('redis').createClient(
         // password: config.redis_auth_token
     });
 
+client.auth(config.redis_auth_token, function (response) {
+    console.log(response)
+})
 
 
 // Print redis errors to the console
