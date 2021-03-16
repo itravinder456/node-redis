@@ -5,7 +5,7 @@ console.log(config.redisEndPoint);
 //     no_ready_check: true
 // });
 
-const client = require('redis').createClient({ host: config.redisEndPoint, port: config.redisPort, auth_pass: 'BT786khgbvgf896Bhgff4ffdvb_gyujht6htc76', tls: { checkServerIdentity: () => undefined } })
+const client = require('redis').createClient({ host: config.redisEndPoint, port: config.redisPort, auth_pass: config.redis_auth_token, tls: { checkServerIdentity: () => undefined } })
 
 
 // Print redis errors to the console
